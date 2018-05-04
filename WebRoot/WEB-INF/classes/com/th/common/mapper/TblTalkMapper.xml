@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.th.common.mapper.TblTalkMapper" >
+  <resultMap id="BaseResultMap" type="com.th.common.entity.TblTalk" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="srcAccountId" property="srcaccountid" jdbcType="INTEGER" />
+    <result column="targetAccountId" property="targetaccountid" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, content, srcAccountId, targetAccountId, time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_talk
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_talk
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.th.common.entity.TblTalk" >
+    insert into tbl_talk (id, content, srcAccountId, 
+      targetAccountId, time)
+    values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{srcaccountid,jdbcType=INTEGER}, 
+      #{targetaccountid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.th.common.entity.TblTalk" >
+    insert into tbl_talk
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="srcaccountid != null" >
+        srcAccountId,
+      </if>
+      <if test="targetaccountid != null" >
+        targetAccountId,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="srcaccountid != null" >
+        #{srcaccountid,jdbcType=INTEGER},
+      </if>
+      <if test="targetaccountid != null" >
+        #{targetaccountid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.th.common.entity.TblTalk" >
+    update tbl_talk
+    <set >
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="srcaccountid != null" >
+        srcAccountId = #{srcaccountid,jdbcType=INTEGER},
+      </if>
+      <if test="targetaccountid != null" >
+        targetAccountId = #{targetaccountid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.th.common.entity.TblTalk" >
+    update tbl_talk
+    set content = #{content,jdbcType=VARCHAR},
+      srcAccountId = #{srcaccountid,jdbcType=INTEGER},
+      targetAccountId = #{targetaccountid,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
